@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"] // Assuming your components are in the 'src' directory
+          // "@/*": ["./*"],
+      // "@components/*": ["./components/*"]
+    }
+  }
+}
