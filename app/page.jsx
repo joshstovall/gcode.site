@@ -1,24 +1,14 @@
 "use client";
 
 import React, { useState } from 'react';
-
 import styles from './page.module.css'
 import Scene from './scene'
-import SliceMetadata from './components/slice-metadata'
-import LoginButtons from './components/login-buttons';
-import SocialButtons from './components/social-buttons';
 import ToastTop from './components/toast';
-import Footer from './components/footer';
 import Sidebar from './components/sidebar';
-import FileMetadata from './components/file-metadata';
-
 import StartMode from './components/start-mode';
 import EditMode from './components/edit-mode';
 import SliceMode from './components/slice-mode';
-
 import { convertGcode } from './helpers/convertGcode';
-
-// import { convertStlToGcode } from './lib/slicer';
 
 export default function Home() {
 
@@ -67,9 +57,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-
       {/* <ToastTop /> */}
-      {/* <Footer /> */}
       <Sidebar />
 
       {
@@ -113,9 +101,8 @@ export default function Home() {
       }
       {
         mode === 'slice' &&
-        <SliceMode metadata={metadata} gcode={gcode}/>
+        <SliceMode metadata={metadata} gcode={gcode} />
       }
-
 
       <div className={styles.canvas}>
         <Scene
@@ -135,15 +122,10 @@ export default function Home() {
           }}
           transform={transform}
           transformCallback={(transform) => {
-            console.log('transform', transform);
             setTransform(transform);
-          
-          }
-        }
-
+          }}
         />
       </div>
-
     </main>
   )
 

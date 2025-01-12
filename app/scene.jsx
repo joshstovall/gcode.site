@@ -1,24 +1,19 @@
 "use client";
 
 import { useState, useEffect, Suspense, useMemo, useRef } from 'react';
-import {Vector3,
-  Quaternion,
-  Group
-} from 'three';
 import { Canvas, useLoader } from '@react-three/fiber';
 import { GCodeLoader } from 'three/examples/jsm/loaders/GCodeLoader';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
-import { 
-  OrbitControls, 
-  Environment, 
-  Grid, 
-  GizmoHelper, 
+import {
+  OrbitControls,
+  Environment,
+  Grid,
+  GizmoHelper,
   GizmoViewport,
   PivotControls,
-  Plane,
-  Box
+  Plane
 } from '@react-three/drei';
-import { Mesh, MeshBasicMaterial, BufferGeometry, MeshToonMaterial } from 'three';
+import { MeshToonMaterial } from 'three';
 import Lights from './components/Lights';
 
 export default function Scene({ stl, gcode, setMode, transform, transformCallback }) {
@@ -32,37 +27,29 @@ export default function Scene({ stl, gcode, setMode, transform, transformCallbac
       <PivotControls
         anchor={[0, 0, 0]}
         scale={10}
-        // position={transform.position}
-        // rotation={transform.rotation}
         autoTransform={true}
         active={true}
         depthTest={false}
         onDrag={(e) => {
-          // const decomposed= e.decompose( new Vector3(), new Quaternion(), new Vector3() );
-       console.log(e)
-        
-       transformCallback(
-        e
-       )
+          transformCallback(e)
         }}
-
-        // onDragEnd={() => {
-        //   if (meshRef.current) {
-        //     transformCallback({
-        //       position: meshRef.current.position.toArray(),
-        //       rotation: meshRef.current.rotation.toArray(),
-        //       scale: meshRef.current.scale.toArray()
-        //     });
-        //   }
-        // }}
+      // onDragEnd={() => {
+      //   if (meshRef.current) {
+      //     transformCallback({
+      //       position: meshRef.current.position.toArray(),
+      //       rotation: meshRef.current.rotation.toArray(),
+      //       scale: meshRef.current.scale.toArray()
+      //     });
+      //   }
+      // }}
       >
         <mesh ref={meshRef}
         //  position={transform.position} 
         //  scale={transform.scale}
-         >
+        >
           <primitive object={geometry} attach="geometry" />
           <meshStandardMaterial color="red" />
-        
+
         </mesh>
       </PivotControls>
     ), [geometry, transform]);
@@ -98,24 +85,24 @@ export default function Scene({ stl, gcode, setMode, transform, transformCallbac
 
   return (
     <Canvas
-    
+
       camera={{ fov: 75, near: 0.1, far: 500, position: [20, 60, 55] }}
     >
-            <color attach="background" args={['#0f0f0f']} />
+      <color attach="background" args={['#0f0f0f']} />
 
-      <OrbitControls 
+      <OrbitControls
         makeDefault  // This is important for GizmoHelper
-        minDistance={3} 
-        maxDistance={300} 
+        minDistance={3}
+        maxDistance={300}
       />
       <GizmoHelper
         alignment="top-right"
         margin={[80, 80]}
       >
-        <GizmoViewport 
-          axisColors={['red', 'green', 'blue']} 
-          labelColor="black" 
-          
+        <GizmoViewport
+          axisColors={['red', 'green', 'blue']}
+          labelColor="black"
+
         />
       </GizmoHelper>
       {!gcodeUrl && (
@@ -127,42 +114,42 @@ export default function Scene({ stl, gcode, setMode, transform, transformCallbac
       <Suspense fallback={null}>
         <group position={[0, 0, 100]}>
           {/* <Box args={[10, 10, 10]} position={[0, 0, 0]} scale={[2, 2, 2]} /> */}
-        <GcodeModel url={gcodeUrl} />
+          <GcodeModel url={gcodeUrl} />
         </group>
       </Suspense>
 
-      <Grid 
-        args={[100, 100]} 
+      <Grid
+        args={[100, 100]}
         position={[0, 0, 0]}
-        scale={[2, 2, 2]} 
-        cellColor="teal" 
+        scale={[2, 2, 2]}
+        cellColor="teal"
         cellSize={5}
         cellThickness={1}
         sectionColor="red"
         sectionSize={10}
         sectionThickness={1}
         fadeStrength={0}
-        fadeDistance={500}   
+        fadeDistance={500}
       />
 
-<Plane 
-args={[1, 1]}
-rotation={[-Math.PI / 2, 0, 0]} 
-position={[0, -0.1, 0]} 
-receiveShadow
-scale={[200, 200, 200]}
-color="red"
-dou
->
+      <Plane
+        args={[1, 1]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, -0.1, 0]}
+        receiveShadow
+        scale={[200, 200, 200]}
+        color="red"
+        dou
+      >
 
-<meshStandardMaterial color="#efefef" 
-side={2}
-/>  
-  
-</Plane>
-<Lights />
+        <meshStandardMaterial color="#efefef"
+          side={2}
+        />
 
-<Environment preset="warehouse" />
+      </Plane>
+      <Lights />
+
+      <Environment preset="warehouse" />
 
     </Canvas>
   );

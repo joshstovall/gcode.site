@@ -1,20 +1,12 @@
 'use client'
 
-import LoginButtons from './login-buttons';
 import SocialButtons from './social-buttons';
 
 export default function StartMode({
-  url,
   setUrl,
   loading,
-  setLoading,
   loaded,
-  setLoaded,
-  progress,
-  setProgress,
-  mode,
   setMode,
-  file,
   setFile
 }) {
 
@@ -55,7 +47,6 @@ export default function StartMode({
         }
         {!loading && !loaded && (
           <div>
-            {/* <LoginButtons /> */}
             <SocialButtons />
           </div>
         )}

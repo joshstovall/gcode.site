@@ -8,21 +8,18 @@ export async function convertGcode(stl_url, progressCallback, doneCallback, tran
 
     return new Promise(async (resolve, reject) => {
 
-        // const
+        let mat = transform
+        let translation = new THREE.Vector3(),
+            rotation = new THREE.Quaternion(),
+            scale = new THREE.Vector3();
 
-        var mat = transform
-var translation = new THREE.Vector3(),
-  rotation = new THREE.Quaternion(),
-  scale = new THREE.Vector3();
+        try {
+            const decomposed = mat.decompose(translation, rotation, scale);
+            console.log(decomposed)
 
-  try {
-    const decomposed = mat.decompose(translation, rotation, scale);
-    console.log(decomposed)
-    
-    } catch (e) {
-        console.log(e)
-    }
-  
+        } catch (e) {
+            console.log(e)
+        }
 
 
         /* stuff using username, password */
@@ -58,28 +55,27 @@ var translation = new THREE.Vector3(),
                 //     value: false,
                 // }, 
                 {
-                //     scope: 'e0',
-                //     key: 'layer_height',
-                //     value: 0.2
-                // }, {
+                    //     scope: 'e0',
+                    //     key: 'layer_height',
+                    //     value: 0.2
+                    // }, {
                     scope: 'e0',
                     key: 'mesh_position_x',
                     value: translation.x - 100
                 }, {
                     scope: 'e0',
                     key: 'mesh_position_y',
-                    value: -translation.z 
+                    value: -translation.z
                 }, {
                     scope: 'e0',
                     key: 'mesh_position_z',
                     value: translation.y + 100
-                }, 
+                },
                 // {
                 //     scope: 'e0',
                 //     key: 'mesh_rotation_delta',
                 //     value: transform.rotation[1] // Y-axis rotation in degrees
                 // },
-                
             ],
 
             /**

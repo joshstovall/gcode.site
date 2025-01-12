@@ -9,7 +9,6 @@ export default function EditMode(
     file,
     sliceCallback,
     slicing,
-    loading,
     progress
   }
 ) {

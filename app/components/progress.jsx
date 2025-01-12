@@ -4,10 +4,10 @@ import React from 'react';
 
 const ProgressBar = ({ percent, show }) => {
   return (
-    <div className="absolute z-10 w-[80%]  bg-white bg-opacity-90  justify-center items-center border border-gray-200 rounded-lg shadow-lg dark:bg-neutral-800 dark:border-neutral-700 margin-auto bottom-10 left-1/2 transform -translate-x-1/2"
-     style={{ display: show ? 'block' : 'none' }}>
-           {/* style={{ display: 'block' }}> */}
-
+    <div
+      className="absolute z-10 w-[80%] bg-white bg-opacity-90 justify-center items-center border border-gray-200 rounded-lg shadow-lg dark:bg-neutral-800 dark:border-neutral-700 margin-auto bottom-10 left-1/2 transform -translate-x-1/2"
+      style={{ display: show ? 'block' : 'none' }}
+    >
       <div className='flex flex-col justify-center items-center space-y-2 mt-20 mb-5'>
         <h1 className='text-2xl font-bold'>Slicing...</h1>
         <p className='text-lg'>Please wait while we slice your files</p>
